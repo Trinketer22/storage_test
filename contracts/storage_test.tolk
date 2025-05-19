@@ -148,9 +148,8 @@ fun cell.truncateAtDepth(self, depth: int): cell {
     var res = beginCell().storeSlice(cs);
 
     if(depth > 0) {
-        if(l != null) {
-            res.storeRef(l.truncateAtDepth(depth - 1));
-        }
+        res.storeRef(l.truncateAtDepth(depth - 1));
+
         if(r != null) {
             res.storeRef(r.truncateAtDepth(depth - 1));
         }
