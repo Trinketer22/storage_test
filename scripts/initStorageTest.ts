@@ -7,12 +7,12 @@ export async function run(provider: NetworkProvider) {
     const ui = provider.ui();
     let isOk = false;
     let owner: Address;
-    let maxN: bigint;
+    let maxN: number;
     let attachValue: bigint;
 
     do {
         owner = await promptAddress("Please specify owner address:", ui, provider.sender().address);
-        maxN  = await promptAmount("Please specify ring N:", 0, ui);
+        maxN  = Number(await promptAmount("Please specify ring N:", 0, ui));
         attachValue = await promptToncoin("Please specify toncoin amount to attach:", ui);
 
         ui.write(JSON.stringify({
@@ -35,7 +35,7 @@ export async function run(provider: NetworkProvider) {
     );
 
     await storageTest.sendInit(provider.sender(), {
-        maxN: Number(maxN),
+        maxN,
         value: attachValue,
     });
 
